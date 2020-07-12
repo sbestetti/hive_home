@@ -1,3 +1,4 @@
+from functools import partial
 import tkinter as tk
 import math
 
@@ -7,6 +8,11 @@ number_of_buttons = len(config.rooms)
 number_of_pages = math.ceil(number_of_buttons/3)
 
 window = tk.Tk()
+
+
+def button_test(passed):
+    print(passed)
+
 
 # Creates rows according to the number of rooms
 # on the config file
@@ -18,7 +24,7 @@ for i in range(2):
 # Adds one button for each room on the config file
 i = 0
 for key in config.rooms.keys():
-    tk.Button(master=window, text=key).grid(
+    tk.Button(master=window, text=key, command=partial(button_test, config.rooms[key])).grid(
         row=i,
         column=0,
         pady=1,
